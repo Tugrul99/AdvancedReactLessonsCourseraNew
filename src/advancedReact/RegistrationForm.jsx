@@ -2,18 +2,11 @@ import { useState } from "react";
 
 import React from "react";
 
-
 const PasswordErrorMessage = () => {
-    return (
-      <p className="FieldError">Password should have at least 8 characters</p>
-    );
-  };
-
-  
-  const getIsFormValid = () => {
-    // Implement this function
-    return true;
-  };
+  return (
+    <p className="FieldError">Password should have at least 8 characters</p>
+  );
+};
 
 const RegistrationForm = () => {
   const [name, setName] = useState("");
@@ -23,21 +16,30 @@ const RegistrationForm = () => {
   const [role, setRole] = useState({
     value: "",
     isTouched: false,
-  })
+  });
 
   const clearForm = () => {
     setName("");
     setLastname("");
     setMail("");
-    setPassword("");
+    setPassword({
+      value: "",
+      isTouched: false,
+    });
+    setRole("role")
   };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     alert("Account created!");
     clearForm();
   };
+
+  const getIsFormValid = () => {
+  
+    return true;
+  };
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -76,10 +78,16 @@ const RegistrationForm = () => {
             Password <sup>*</sup>
           </label>
           <input
+            type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={password.value}
+            onChange={(e) =>
+              setPassword({ ...password, value: e.target.value })
+            }
           />
+             {password.isTouched && password.value.length < 8 ? ( 
+             <PasswordErrorMessage /> 
+           ) : null}
         </div>
         <div className="Field">
           <label>
@@ -91,7 +99,9 @@ const RegistrationForm = () => {
             <option value="business">Business</option>
           </select>
         </div>
-        <button type="submit">Create account</button>
+        <button type="submit" disabled={!getIsFormValid()}>
+          Create account
+        </button>
       </fieldset>
     </form>
   );
