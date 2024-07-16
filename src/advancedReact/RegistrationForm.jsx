@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import React from "react";
 
 const PasswordErrorMessage = () => {
@@ -12,11 +11,11 @@ const RegistrationForm = () => {
   const [name, setName] = useState("");
   const [lastName, setLastname] = useState("");
   const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState({
+  const [password, setPassword] = useState({
     value: "",
     isTouched: false,
   });
+  const [role, setRole] = useState(""); 
 
   const clearForm = () => {
     setName("");
@@ -26,7 +25,7 @@ const RegistrationForm = () => {
       value: "",
       isTouched: false,
     });
-    setRole("role")
+    setRole("");
   };
 
   const handleSubmit = (e) => {
@@ -36,10 +35,8 @@ const RegistrationForm = () => {
   };
 
   const getIsFormValid = () => {
-  
-    return true;
+    return password.value.length >= 8 && role !== ""; 
   };
-
 
   return (
     <form onSubmit={handleSubmit}>
@@ -84,20 +81,29 @@ const RegistrationForm = () => {
             onChange={(e) =>
               setPassword({ ...password, value: e.target.value })
             }
+            onBlur={() => {
+              setPassword({ ...password, isTouched: true });
+            }}
           />
-             {password.isTouched && password.value.length < 8 ? ( 
-             <PasswordErrorMessage /> 
-           ) : null}
+          {password.isTouched && password.value.length < 8 ? (
+            <PasswordErrorMessage />
+          ) : null}
         </div>
         <div className="Field">
           <label>
             Role <sup>*</sup>
           </label>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="role">Role</option>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)} // Role state güncellenir
+          >
+            <option value="">Role</option>
             <option value="individual">Individual</option>
             <option value="business">Business</option>
           </select>
+          {role === "" ? (
+            <p className="FieldError">Role is required</p>
+          ) : null}
         </div>
         <button type="submit" disabled={!getIsFormValid()}>
           Create account
