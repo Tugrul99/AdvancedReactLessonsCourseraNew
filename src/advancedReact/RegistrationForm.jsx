@@ -95,7 +95,7 @@ const RegistrationForm = () => {
           </label>
           <select
             value={role}
-            onChange={(e) => setRole(e.target.value)} // Role state güncellenir
+            onChange={(e) => setRole(e.target.value)}
           >
             <option value="">Role</option>
             <option value="individual">Individual</option>
