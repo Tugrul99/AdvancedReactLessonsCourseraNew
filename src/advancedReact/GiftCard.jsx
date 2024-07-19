@@ -10,6 +10,8 @@ const GiftCard = () => {
     instructions: "To use your coupon, click the button below.",
   });
 
+  
+
   function spendGiftCard() {
     setGiftCard((prev) => {
       return {
