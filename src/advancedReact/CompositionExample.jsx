@@ -31,25 +31,24 @@ const CompositionExample = () => {
   //     </>
   //   );
   //  3. soru. Bir Button bileşeni oluşturun. React.cloneElement kullanarak bu buton bileşenine dinamik olarak farklı onClick fonksiyonları ekleyin.
+  //   function Buton({ onClick, children, style }) {
+  //     return (
+  //       <button style={style} onClick={onClick}>
+  //         {children}
+  //       </button>
+  //     );
+  //   }
+  //   const handleClick = () => {
+  //     alert("Button has been touched.");
+  //   };
+  //   const newButton = React.cloneElement(
+  //     <Buton>Evet</Buton>,
+  //     { onClick: handleClick, style: { color: "red" } }
+  //   );
+  //   return <>{newButton}</>;
 
-//   function Buton({ onClick, children, style }) {
-//     return (
-//       <button style={style} onClick={onClick}>
-//         {children}
-//       </button>
-//     );
-//   }
 
-//   const handleClick = () => {
-//     alert("Button has been touched.");
-//   };
-
-//   const newButton = React.cloneElement(
-//     <Buton>Evet</Buton>,
-//     { onClick: handleClick, style: { color: "red" } }
-//   );
-
-//   return <>{newButton}</>;
+  
 };
 
 export default CompositionExample;
